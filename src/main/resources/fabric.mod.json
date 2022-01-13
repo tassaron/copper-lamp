@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "copperlamp",
+  "version": "${version}",
+
+  "name": "Copper Lamp",
+  "description": "Adds copper lamps that function like inverted redstone lamps",
+  "authors": [
+    "tassaron"
+  ],
+  "contact": {
+    "homepage": "https://tassaron.com",
+    "sources": "https://github.com/tassaron/copperlamp"
+  },
+
+  "license": "MIT",
+  "icon": "assets/copperlamp/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.tassaron.copperlamp.CopperLampMod"
+    ]
+  },
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  }
+}
