@@ -41,6 +41,5 @@ public class CopperLampBlock extends RedstoneLampBlock {
         if ((Boolean)state.get(LIT) && world.isReceivingRedstonePower(pos)) {
             world.setBlockState(pos, (BlockState)state.cycle(LIT), 2);
         }
-
     }
 }

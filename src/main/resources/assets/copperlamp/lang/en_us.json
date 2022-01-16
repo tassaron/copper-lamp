@@ -1,3 +1,10 @@
 {
-  "block.copperlamp.copper_lamp": "Copper Lamp"
+  "block.copperlamp.copper_lamp": "Copper Lamp",
+  "block.copperlamp.waxed_copper_lamp": "Waxed Copper Lamp",
+  "block.copperlamp.exposed_copper_lamp": "Exposed Copper Lamp",
+  "block.copperlamp.waxed_exposed_copper_lamp": "Waxed Exposed Copper Lamp",
+  "block.copperlamp.weathered_copper_lamp": "Weathered Copper Lamp",
+  "block.copperlamp.waxed_weathered_copper_lamp": "Waxed Weathered Copper Lamp",
+  "block.copperlamp.oxidized_copper_lamp": "Oxidized Copper Lamp",
+  "block.copperlamp.waxed_oxidized_copper_lamp": "Waxed Oxidized Copper Lamp"
 }

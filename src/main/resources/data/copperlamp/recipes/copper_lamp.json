@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "CRC",
-    "RGR",
+    "CCC",
+    "CGC",
     "CRC"
   ],
   "key": {
@@ -10,7 +10,7 @@
       "item": "minecraft:copper_ingot"
     },
     "R": {
-      "item": "minecraft:redstone"
+      "item": "minecraft:redstone_torch"
     },
     "G": {
       "item": "minecraft:glowstone"

@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "lit=true": { "model": "copperlamp:block/weathered_copper_lamp" },
+    "lit=false": { "model": "copperlamp:block/weathered_copper_lamp_off" }
+  }
+}
