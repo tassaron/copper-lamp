@@ -4,13 +4,13 @@
   "version": "${version}",
 
   "name": "Copper Lamp",
-  "description": "Adds copper lamps that function like inverted redstone lamps",
+  "description": "Adds copper lamps that can oxidize and emit light unless powered by redstone",
   "authors": [
     "tassaron"
   ],
   "contact": {
     "homepage": "https://tassaron.com",
-    "sources": "https://github.com/tassaron/copperlamp"
+    "sources": "https://github.com/tassaron/copper-lamp"
   },
 
   "license": "MIT",
