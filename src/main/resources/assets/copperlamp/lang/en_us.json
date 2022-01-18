@@ -6,5 +6,6 @@
   "block.copperlamp.weathered_copper_lamp": "Weathered Copper Lamp",
   "block.copperlamp.waxed_weathered_copper_lamp": "Waxed Weathered Copper Lamp",
   "block.copperlamp.oxidized_copper_lamp": "Oxidized Copper Lamp",
-  "block.copperlamp.waxed_oxidized_copper_lamp": "Waxed Oxidized Copper Lamp"
+  "block.copperlamp.waxed_oxidized_copper_lamp": "Waxed Oxidized Copper Lamp",
+  "block.copperlamp.powered_copper_block": "Powered Copper Block"
 }
