@@ -6,6 +6,12 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -14,6 +20,21 @@ public class PoweredCopperBlock extends BlockWithEntity implements BlockEntityPr
     public PoweredCopperBlock(AbstractBlock.Settings settings) {
             super(settings);
     }
+
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
+        PoweredCopperBlockEntity be = (PoweredCopperBlockEntity)world.getBlockEntity(pos);
+        if (be.energyStorage.getAmount() < 1) {
+            return;
+        }
+        if (entity instanceof LivingEntity
+                && !((LivingEntity)entity).getEquippedStack(EquipmentSlot.FEET).isOf(Items.LEATHER_BOOTS)) {
+            entity.damage(DamageSource.LIGHTNING_BOLT, 1.0F);
+        }
+
+        super.onSteppedOn(world, pos, state, entity);
+    }
+
+    // BlockEntity-related Methods
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
