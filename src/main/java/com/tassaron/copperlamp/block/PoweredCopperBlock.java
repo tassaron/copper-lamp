@@ -6,14 +6,12 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class PoweredCopperBlock extends BlockWithEntity implements BlockEntityProvider {
 
@@ -21,18 +19,25 @@ public class PoweredCopperBlock extends BlockWithEntity implements BlockEntityPr
             super(settings);
     }
 
-    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-        PoweredCopperBlockEntity be = (PoweredCopperBlockEntity)world.getBlockEntity(pos);
+    public PoweredCopperBlockEntity getBlockEntity(World world, BlockPos pos) {
+        return (PoweredCopperBlockEntity) world.getBlockEntity(pos);
+    }
+
+    public boolean isPowered(PoweredCopperBlockEntity be) {
         if (be.energyStorage.getAmount() < 1) {
+            return false;
+        }
+        return true;
+    }
+
+    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        if (!isPowered(getBlockEntity(world, pos))) {
             return;
         }
-        if (entity instanceof LivingEntity
-                && !((LivingEntity)entity).getEquippedStack(EquipmentSlot.FEET).isOf(Items.LEATHER_BOOTS)) {
-            entity.damage(DamageSource.LIGHTNING_BOLT, 1.0F);
-        }
-
-        super.onSteppedOn(world, pos, state, entity);
+        BlockPos blockPos = pos.up();
+        world.spawnParticles(ParticleTypes.ELECTRIC_SPARK, (double)blockPos.getX() + 0.5D, (double)blockPos.getY() + 0.25D, (double)blockPos.getZ() + 0.5D, 8, 0.5D, 0.25D, 0.5D, 0.0D);
     }
+
 
     // BlockEntity-related Methods
 

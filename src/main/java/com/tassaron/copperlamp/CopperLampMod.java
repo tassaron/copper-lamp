@@ -1,6 +1,7 @@
 package com.tassaron.copperlamp;
 
 import com.tassaron.copperlamp.block.CopperLampBlock;
+import com.tassaron.copperlamp.block.CopperTorchBlock;
 import com.tassaron.copperlamp.block.PoweredCopperBlock;
 import com.tassaron.copperlamp.blockentity.PoweredCopperBlockEntity;
 import net.fabricmc.api.ModInitializer;
@@ -34,6 +35,7 @@ public class CopperLampMod implements ModInitializer {
 	public static final Block WAXED_EXPOSED_COPPER_LAMP = new CopperLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
 	public static final Block WAXED_WEATHERED_COPPER_LAMP = new CopperLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
 	public static final Block WAXED_OXIDIZED_COPPER_LAMP = new CopperLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
+	public static final Block COPPER_TORCH = new CopperTorchBlock(AbstractBlock.Settings.of(Material.DECORATION).noCollision().breakInstantly().luminance(createLightLevelFromLitBlockState(7)).sounds(BlockSoundGroup.WOOD));
 	public static final Block POWERED_COPPER_BLOCK = new PoweredCopperBlock(FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).requiresTool().strength(3.0F, 6.0F).sounds(BlockSoundGroup.COPPER));
 	public static BlockEntityType<PoweredCopperBlockEntity> POWERED_COPPER_BLOCK_ENTITY;
 
@@ -63,6 +65,10 @@ public class CopperLampMod implements ModInitializer {
 		OxidizableBlocksRegistry.registerWaxableBlockPair(EXPOSED_COPPER_LAMP, WAXED_EXPOSED_COPPER_LAMP);
 		OxidizableBlocksRegistry.registerWaxableBlockPair(WEATHERED_COPPER_LAMP, WAXED_WEATHERED_COPPER_LAMP);
 		OxidizableBlocksRegistry.registerWaxableBlockPair(OXIDIZED_COPPER_LAMP, WAXED_OXIDIZED_COPPER_LAMP);
+
+		LOGGER.info("Registering copper torch");
+		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "copper_torch"), COPPER_TORCH);
+		Registry.register(Registry.ITEM, new Identifier("copperlamp", "copper_torch"), new BlockItem(COPPER_TORCH, new FabricItemSettings().group(ItemGroup.DECORATIONS)));
 
 		LOGGER.info("Registering powered copper block");
 		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "powered_copper_block"), POWERED_COPPER_BLOCK);

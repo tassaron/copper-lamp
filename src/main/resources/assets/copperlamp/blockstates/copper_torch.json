@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "copperlamp:block/copper_torch_off"
+    },
+    "lit=true": {
+      "model": "copperlamp:block/copper_torch"
+    }
+  }
+}
