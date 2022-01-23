@@ -36,8 +36,8 @@ public class CopperLampMod implements ModInitializer {
 	public static final Block WAXED_EXPOSED_COPPER_LAMP = new CopperLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
 	public static final Block WAXED_WEATHERED_COPPER_LAMP = new CopperLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
 	public static final Block WAXED_OXIDIZED_COPPER_LAMP = new CopperLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
-	public static final Block COPPER_TORCH = new CopperTorchBlock(AbstractBlock.Settings.of(Material.DECORATION).noCollision().breakInstantly().luminance((state) -> 15).sounds(BlockSoundGroup.WOOD), ParticleTypes.SOUL_FIRE_FLAME);
-	public static final Block COPPER_WALL_TORCH = new WallCopperTorchBlock(AbstractBlock.Settings.of(Material.DECORATION).noCollision().breakInstantly().luminance((state) -> 15).sounds(BlockSoundGroup.WOOD).dropsLike(TORCH), ParticleTypes.SOUL_FIRE_FLAME);
+	public static final Block COPPER_TORCH = new CopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH), ParticleTypes.SOUL_FIRE_FLAME);
+	public static final Block COPPER_WALL_TORCH = new WallCopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH).dropsLike(COPPER_TORCH), ParticleTypes.SOUL_FIRE_FLAME);
 	public static final Block POWERED_COPPER_BLOCK = new PoweredCopperBlock(FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).requiresTool().strength(3.0F, 6.0F).sounds(BlockSoundGroup.COPPER));
 	public static BlockEntityType<PoweredCopperBlockEntity> POWERED_COPPER_BLOCK_ENTITY;
 

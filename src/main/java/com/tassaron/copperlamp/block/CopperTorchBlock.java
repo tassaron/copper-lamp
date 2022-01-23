@@ -1,6 +1,8 @@
 package com.tassaron.copperlamp.block;
 
 import com.tassaron.copperlamp.CopperLampMod;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TorchBlock;
