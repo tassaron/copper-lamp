@@ -1,13 +1,12 @@
 package com.tassaron.copperlamp.block;
 
 import com.tassaron.copperlamp.CopperLampMod;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TorchBlock;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -20,6 +19,7 @@ public class CopperTorchBlock extends TorchBlock {
     private final short tickDelay = 20;
     public CopperTorchBlock(Settings settings, DefaultParticleType particle) {
         super(settings, particle);
+        this.lootTableId = new Identifier("copperlamp", "blocks/copper_torch");
     }
 
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
