@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "com.tassaron.copperlamp.CopperLampMod"
+    ],
+    "client": [
+      "com.tassaron.copperlamp.CopperLampModClient"
     ]
   },
 
