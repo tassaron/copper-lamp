@@ -17,5 +17,6 @@ public class CopperLampModClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		LOGGER.info("Registering cutout for copper torch");
 		BlockRenderLayerMap.INSTANCE.putBlock(CopperLampMod.COPPER_TORCH, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(CopperLampMod.COPPER_WALL_TORCH, RenderLayer.getCutout());
 	}
 }
