@@ -41,9 +41,8 @@ public class CopperLampMod implements ModInitializer {
 	public static final Block LIT_COPPER_WALL_TORCH = new WallCopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH), true);
 	public static final WallStandingBlockItem COPPER_TORCH_ITEM = new WallStandingBlockItem(COPPER_TORCH, COPPER_WALL_TORCH, new FabricItemSettings().group(ItemGroup.DECORATIONS));
 	public static final WallStandingBlockItem LIT_COPPER_TORCH_ITEM = new WallStandingBlockItem(LIT_COPPER_TORCH, LIT_COPPER_WALL_TORCH, new FabricItemSettings().group(ItemGroup.DECORATIONS));
-
-	public static final Block COPPER_CAPACITOR_BLOCK = new CopperCapacitorBlock(FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).requiresTool().strength(3.0F, 6.0F).sounds(BlockSoundGroup.COPPER));
-	public static BlockEntityType<CopperCapacitorBlockEntity> COPPER_CAPACITOR_BLOCK_ENTITY;
+	public static final Block COPPER_CAPACITOR_BLOCK = new CopperCapacitorBlock(FabricBlockSettings.copy(COPPER_BLOCK));
+	public static final BlockEntityType<CopperCapacitorBlockEntity> COPPER_CAPACITOR_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(CopperCapacitorBlockEntity::new, COPPER_CAPACITOR_BLOCK).build(null);
 
 	@Override
 	public void onInitialize() {
@@ -78,12 +77,12 @@ public class CopperLampMod implements ModInitializer {
 		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "copper_torch"), COPPER_TORCH);
 		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "lit_copper_torch"), LIT_COPPER_TORCH);
 		Registry.register(Registry.ITEM, new Identifier("copperlamp", "copper_torch"), COPPER_TORCH_ITEM);
-		Registry.register(Registry.ITEM, new Identifier("copperlamp", "lit_copper_torch"), new WallStandingBlockItem(LIT_COPPER_TORCH, LIT_COPPER_WALL_TORCH, new FabricItemSettings().group(ItemGroup.DECORATIONS)));
+		Registry.register(Registry.ITEM, new Identifier("copperlamp", "lit_copper_torch"), LIT_COPPER_TORCH_ITEM);
 
 		LOGGER.info("Registering powered copper block");
 		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "copper_capacitor_block"), COPPER_CAPACITOR_BLOCK);
 		Registry.register(Registry.ITEM, new Identifier("copperlamp", "copper_capacitor_block"), new BlockItem(COPPER_CAPACITOR_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS)));
-		COPPER_CAPACITOR_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "copperlamp:copper_capacitor_block_entity", FabricBlockEntityTypeBuilder.create(CopperCapacitorBlockEntity::new, COPPER_CAPACITOR_BLOCK).build(null));
+		Registry.register(Registry.BLOCK_ENTITY_TYPE, "copperlamp:copper_capacitor_block_entity", COPPER_CAPACITOR_BLOCK_ENTITY);
 		EnergyStorage.SIDED.registerForBlockEntity(
 				(entity, direction) -> entity.energyStorage, COPPER_CAPACITOR_BLOCK_ENTITY
 		);
