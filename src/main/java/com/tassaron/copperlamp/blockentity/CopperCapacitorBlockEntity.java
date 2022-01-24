@@ -4,8 +4,7 @@ import com.tassaron.copperlamp.CopperLampMod;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
@@ -13,6 +12,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.core.jmx.Server;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 import java.util.List;
@@ -62,6 +62,7 @@ public class CopperCapacitorBlockEntity extends BlockEntity {
                     if (!entity.getEquippedStack(EquipmentSlot.FEET).isOf(Items.LEATHER_BOOTS)) {
                         entity.damage(DamageSource.LIGHTNING_BOLT, (float) amountUsed);
                         ((ServerWorld) world).spawnParticles(ParticleTypes.ELECTRIC_SPARK, entity.getX(), entity.getY(), entity.getZ(), 4, 0.5D, 0.25D, 0.5D, 0.0D);
+                        entity.onStruckByLightning((ServerWorld)world, new LightningEntity(EntityType.LIGHTNING_BOLT, world));
                     }
                 }
                 be.tickDelay = 20;
