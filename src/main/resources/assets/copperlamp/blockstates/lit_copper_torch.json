@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "copperlamp:block/lit_copper_torch"
+    }
+  }
+}

@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "com.tassaron.copperlamp.CopperLampMod"
+    ],
+    "client": [
+      "com.tassaron.copperlamp.CopperLampModClient"
     ]
   },
 
@@ -28,5 +31,8 @@
     "fabric": "*",
     "minecraft": "1.18.x",
     "java": ">=17"
-  }
+  },
+  "mixins": [
+    "copperlamp.mixins.json"
+  ]
 }
