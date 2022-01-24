@@ -35,10 +35,10 @@ public class CopperLampMod implements ModInitializer {
 	public static final Block WAXED_EXPOSED_COPPER_LAMP = new CopperLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
 	public static final Block WAXED_WEATHERED_COPPER_LAMP = new CopperLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
 	public static final Block WAXED_OXIDIZED_COPPER_LAMP = new CopperLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
-	public static final Block COPPER_TORCH = new CopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH), false);
-	public static final Block LIT_COPPER_TORCH = new CopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH), true);
-	public static final Block COPPER_WALL_TORCH = new WallCopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH), false);
-	public static final Block LIT_COPPER_WALL_TORCH = new WallCopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH), true);
+	public static final Block COPPER_TORCH = new CopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH).luminance((state) -> 0), false);
+	public static final Block LIT_COPPER_TORCH = new CopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH).luminance((state) -> 15), true);
+	public static final Block COPPER_WALL_TORCH = new WallCopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH).luminance((state) -> 0), false);
+	public static final Block LIT_COPPER_WALL_TORCH = new WallCopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH).luminance((state) -> 15), true);
 	public static final WallStandingBlockItem COPPER_TORCH_ITEM = new WallStandingBlockItem(COPPER_TORCH, COPPER_WALL_TORCH, new FabricItemSettings().group(ItemGroup.DECORATIONS));
 	public static final WallStandingBlockItem LIT_COPPER_TORCH_ITEM = new WallStandingBlockItem(LIT_COPPER_TORCH, LIT_COPPER_WALL_TORCH, new FabricItemSettings().group(ItemGroup.DECORATIONS));
 	public static final Block COPPER_CAPACITOR_BLOCK = new CopperCapacitorBlock(FabricBlockSettings.copy(COPPER_BLOCK));
