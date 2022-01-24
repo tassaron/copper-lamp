@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "copperlamp:powered_copper_block"
+          "name": "copperlamp:copper_capacitor_block"
         }
       ],
       "conditions": [

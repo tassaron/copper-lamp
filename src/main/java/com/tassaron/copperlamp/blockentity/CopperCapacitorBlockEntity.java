@@ -17,7 +17,7 @@ import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 import java.util.List;
 
-public class PoweredCopperBlockEntity extends BlockEntity {
+public class CopperCapacitorBlockEntity extends BlockEntity {
     private short tickDelay = 0;
     public final SimpleEnergyStorage energyStorage = new SimpleEnergyStorage(10, 10, 10) {
         @Override
@@ -26,8 +26,8 @@ public class PoweredCopperBlockEntity extends BlockEntity {
         }
     };
 
-    public PoweredCopperBlockEntity(BlockPos pos, BlockState state) {
-        super(CopperLampMod.POWERED_COPPER_BLOCK_ENTITY, pos, state);
+    public CopperCapacitorBlockEntity(BlockPos pos, BlockState state) {
+        super(CopperLampMod.COPPER_CAPACITOR_BLOCK_ENTITY, pos, state);
     }
 
     private static Box getAttackZone(BlockPos pos) {
@@ -38,7 +38,7 @@ public class PoweredCopperBlockEntity extends BlockEntity {
         return (new Box(i, j, k, i + 1, j + 1, k + 1));
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, PoweredCopperBlockEntity be) {
+    public static void tick(World world, BlockPos pos, BlockState state, CopperCapacitorBlockEntity be) {
         if (world == null || world.isClient) {
             return;
         } else if (be.tickDelay > 0) {
