@@ -36,8 +36,13 @@ public class CopperLampMod implements ModInitializer {
 	public static final Block WAXED_EXPOSED_COPPER_LAMP = new CopperLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
 	public static final Block WAXED_WEATHERED_COPPER_LAMP = new CopperLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
 	public static final Block WAXED_OXIDIZED_COPPER_LAMP = new CopperLampBlock(FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
-	public static final Block COPPER_TORCH = new CopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH), ParticleTypes.SOUL_FIRE_FLAME);
-	public static final Block COPPER_WALL_TORCH = new WallCopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH).dropsLike(COPPER_TORCH), ParticleTypes.SOUL_FIRE_FLAME);
+	public static final Block COPPER_TORCH = new CopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH), false);
+	public static final Block LIT_COPPER_TORCH = new CopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH), true);
+	public static final Block COPPER_WALL_TORCH = new WallCopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH), false);
+	public static final Block LIT_COPPER_WALL_TORCH = new WallCopperTorchBlock(FabricBlockSettings.copy(SOUL_TORCH), true);
+	public static final WallStandingBlockItem COPPER_TORCH_ITEM = new WallStandingBlockItem(COPPER_TORCH, COPPER_WALL_TORCH, new FabricItemSettings().group(ItemGroup.DECORATIONS));
+	public static final WallStandingBlockItem LIT_COPPER_TORCH_ITEM = new WallStandingBlockItem(LIT_COPPER_TORCH, LIT_COPPER_WALL_TORCH, new FabricItemSettings().group(ItemGroup.DECORATIONS));
+
 	public static final Block POWERED_COPPER_BLOCK = new PoweredCopperBlock(FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).requiresTool().strength(3.0F, 6.0F).sounds(BlockSoundGroup.COPPER));
 	public static BlockEntityType<PoweredCopperBlockEntity> POWERED_COPPER_BLOCK_ENTITY;
 
@@ -70,8 +75,11 @@ public class CopperLampMod implements ModInitializer {
 
 		LOGGER.info("Registering copper torch");
 		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "copper_wall_torch"), COPPER_WALL_TORCH);
+		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "lit_copper_wall_torch"), LIT_COPPER_WALL_TORCH);
 		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "copper_torch"), COPPER_TORCH);
-		Registry.register(Registry.ITEM, new Identifier("copperlamp", "copper_torch"), (BlockItem) new WallStandingBlockItem(COPPER_TORCH, COPPER_WALL_TORCH, new FabricItemSettings().group(ItemGroup.DECORATIONS)));
+		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "lit_copper_torch"), LIT_COPPER_TORCH);
+		Registry.register(Registry.ITEM, new Identifier("copperlamp", "copper_torch"), COPPER_TORCH_ITEM);
+		Registry.register(Registry.ITEM, new Identifier("copperlamp", "lit_copper_torch"), new WallStandingBlockItem(LIT_COPPER_TORCH, LIT_COPPER_WALL_TORCH, new FabricItemSettings().group(ItemGroup.DECORATIONS)));
 
 		LOGGER.info("Registering powered copper block");
 		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "powered_copper_block"), POWERED_COPPER_BLOCK);

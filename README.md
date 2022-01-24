@@ -14,9 +14,6 @@ This mod adds some miscellaneous copper related blocks.
 
 
 ## Work in Progress Features for Version 2.0.0
-- **Powered Copper Block** -- Consumes 1 Energy per tick continuously to shock entities in the world, similar to a magma block. Damage can be avoided by sneaking or wearing leather boots.
-
-## Planned Features
-- **Copper Blast Furnace**
-
-- **Copper Torch** -- Emits 1 Energy per tick into an energy-storing block above it (e.g., a powered copper block)
+- **Copper on a Stick** -- It's like a torch, except you put copper on the end of a stick. Place this on a lightning rod.
+- **Copper Torch** -- The heat of a lightning strike permanently transforms "copper on a stick" into a copper torch. The electrical energy then emits from the torch into energy-storing blocks above it.
+- **Powered Copper Block** -- Consumes 1-10 energy every 20 ticks to shock entities in the world, similar to a magma block. Damage can be avoided by wearing leather boots.
