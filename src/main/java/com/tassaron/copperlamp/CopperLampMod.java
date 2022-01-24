@@ -1,7 +1,7 @@
 package com.tassaron.copperlamp;
 
 import com.tassaron.copperlamp.block.*;
-import com.tassaron.copperlamp.blockentity.PoweredCopperBlockEntity;
+import com.tassaron.copperlamp.blockentity.CopperCapacitorBlockEntity;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -12,7 +12,6 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.WallStandingBlockItem;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
@@ -43,8 +42,8 @@ public class CopperLampMod implements ModInitializer {
 	public static final WallStandingBlockItem COPPER_TORCH_ITEM = new WallStandingBlockItem(COPPER_TORCH, COPPER_WALL_TORCH, new FabricItemSettings().group(ItemGroup.DECORATIONS));
 	public static final WallStandingBlockItem LIT_COPPER_TORCH_ITEM = new WallStandingBlockItem(LIT_COPPER_TORCH, LIT_COPPER_WALL_TORCH, new FabricItemSettings().group(ItemGroup.DECORATIONS));
 
-	public static final Block POWERED_COPPER_BLOCK = new PoweredCopperBlock(FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).requiresTool().strength(3.0F, 6.0F).sounds(BlockSoundGroup.COPPER));
-	public static BlockEntityType<PoweredCopperBlockEntity> POWERED_COPPER_BLOCK_ENTITY;
+	public static final Block COPPER_CAPACITOR_BLOCK = new CopperCapacitorBlock(FabricBlockSettings.of(Material.METAL, MapColor.ORANGE).requiresTool().strength(3.0F, 6.0F).sounds(BlockSoundGroup.COPPER));
+	public static BlockEntityType<CopperCapacitorBlockEntity> COPPER_CAPACITOR_BLOCK_ENTITY;
 
 	@Override
 	public void onInitialize() {
@@ -82,11 +81,11 @@ public class CopperLampMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier("copperlamp", "lit_copper_torch"), new WallStandingBlockItem(LIT_COPPER_TORCH, LIT_COPPER_WALL_TORCH, new FabricItemSettings().group(ItemGroup.DECORATIONS)));
 
 		LOGGER.info("Registering powered copper block");
-		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "powered_copper_block"), POWERED_COPPER_BLOCK);
-		Registry.register(Registry.ITEM, new Identifier("copperlamp", "powered_copper_block"), new BlockItem(POWERED_COPPER_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS)));
-		POWERED_COPPER_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "copperlamp:powered_copper_block_entity", FabricBlockEntityTypeBuilder.create(PoweredCopperBlockEntity::new, POWERED_COPPER_BLOCK).build(null));
+		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "copper_capacitor_block"), COPPER_CAPACITOR_BLOCK);
+		Registry.register(Registry.ITEM, new Identifier("copperlamp", "copper_capacitor_block"), new BlockItem(COPPER_CAPACITOR_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS)));
+		COPPER_CAPACITOR_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "copperlamp:copper_capacitor_block_entity", FabricBlockEntityTypeBuilder.create(CopperCapacitorBlockEntity::new, COPPER_CAPACITOR_BLOCK).build(null));
 		EnergyStorage.SIDED.registerForBlockEntity(
-				(entity, direction) -> entity.energyStorage, POWERED_COPPER_BLOCK_ENTITY
+				(entity, direction) -> entity.energyStorage, COPPER_CAPACITOR_BLOCK_ENTITY
 		);
 	}
 

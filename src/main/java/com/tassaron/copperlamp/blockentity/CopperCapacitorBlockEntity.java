@@ -4,8 +4,7 @@ import com.tassaron.copperlamp.CopperLampMod;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
@@ -13,11 +12,12 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.core.jmx.Server;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 import java.util.List;
 
-public class PoweredCopperBlockEntity extends BlockEntity {
+public class CopperCapacitorBlockEntity extends BlockEntity {
     private short tickDelay = 0;
     public final SimpleEnergyStorage energyStorage = new SimpleEnergyStorage(10, 10, 10) {
         @Override
@@ -26,8 +26,8 @@ public class PoweredCopperBlockEntity extends BlockEntity {
         }
     };
 
-    public PoweredCopperBlockEntity(BlockPos pos, BlockState state) {
-        super(CopperLampMod.POWERED_COPPER_BLOCK_ENTITY, pos, state);
+    public CopperCapacitorBlockEntity(BlockPos pos, BlockState state) {
+        super(CopperLampMod.COPPER_CAPACITOR_BLOCK_ENTITY, pos, state);
     }
 
     private static Box getAttackZone(BlockPos pos) {
@@ -38,7 +38,7 @@ public class PoweredCopperBlockEntity extends BlockEntity {
         return (new Box(i, j, k, i + 1, j + 1, k + 1));
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, PoweredCopperBlockEntity be) {
+    public static void tick(World world, BlockPos pos, BlockState state, CopperCapacitorBlockEntity be) {
         if (world == null || world.isClient) {
             return;
         } else if (be.tickDelay > 0) {
@@ -62,6 +62,7 @@ public class PoweredCopperBlockEntity extends BlockEntity {
                     if (!entity.getEquippedStack(EquipmentSlot.FEET).isOf(Items.LEATHER_BOOTS)) {
                         entity.damage(DamageSource.LIGHTNING_BOLT, (float) amountUsed);
                         ((ServerWorld) world).spawnParticles(ParticleTypes.ELECTRIC_SPARK, entity.getX(), entity.getY(), entity.getZ(), 4, 0.5D, 0.25D, 0.5D, 0.0D);
+                        entity.onStruckByLightning((ServerWorld)world, new LightningEntity(EntityType.LIGHTNING_BOLT, world));
                     }
                 }
                 be.tickDelay = 20;

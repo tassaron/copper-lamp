@@ -2,19 +2,22 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "CCC",
-    "CCC",
-    "CRC"
+    "CRC",
+    "CTC"
   ],
   "key": {
     "C": {
       "item": "minecraft:copper_ingot"
     },
     "R": {
-      "item": "minecraft:redstone"
+      "item": "minecraft:redstone_block"
+    },
+    "T": {
+      "item": "copperlamp:copper_torch"
     }
   },
   "result": {
-    "item": "copperlamp:powered_copper_block",
+    "item": "copperlamp:copper_capacitor_block",
     "count": 1
   }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "minecraft:block/copper_block",
+    "side": "copperlamp:block/copper_capacitor_block"
+  }
+}
