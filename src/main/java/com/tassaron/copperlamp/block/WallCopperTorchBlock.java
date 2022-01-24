@@ -38,6 +38,12 @@ public class WallCopperTorchBlock extends WallTorchBlock {
         }
     }
 
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+        if (lit) {
+            super.randomDisplayTick(state, world, pos, random);
+        }
+    }
+
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(new Property[]{FACING});
     }
