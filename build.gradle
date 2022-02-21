@@ -24,7 +24,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// RebornCore Energy API
-	modImplementation("teamreborn:energy:${project.reborn_energy_version}") {
+	include modApi("teamreborn:energy:${project.reborn_energy_version}") {
 		exclude group: "net.fabricmc.fabric-api"
 	}
 
