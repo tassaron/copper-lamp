@@ -14,6 +14,8 @@ import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 import java.util.Random;
 
+import static com.tassaron.copperlamp.CopperLampMod.COPPER_TORCH_ENERGY;
+
 public class CopperTorchBlock extends TorchBlock {
     public static final short tickDelay = 20;
     public boolean lit;
@@ -39,8 +41,8 @@ public class CopperTorchBlock extends TorchBlock {
             return;
         }
         try (Transaction transaction = Transaction.openOuter()) {
-            long amountInserted = es.insert(1, transaction);
-            if (amountInserted == 1) {
+            long amountInserted = es.insert(COPPER_TORCH_ENERGY, transaction);
+            if (amountInserted > 0) {
                 CopperLampMod.LOGGER.info("Copper torch is transmitting power to x{}, y{}, z{}", pos.getX(), pos.getY(), pos.getZ());
                 transaction.commit();
             }

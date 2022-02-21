@@ -2,6 +2,7 @@ package com.tassaron.copperlamp;
 
 import com.tassaron.copperlamp.block.*;
 import com.tassaron.copperlamp.blockentity.CopperCapacitorBlockEntity;
+import com.tassaron.copperlamp.config.SimpleConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -27,6 +28,8 @@ import static net.minecraft.block.Blocks.*;
 
 public class CopperLampMod implements ModInitializer {
 	public static final Logger LOGGER = LogManager.getLogger("copperlamp");
+
+	// Blocks
 	public static final Block COPPER_LAMP = new OxidizableCopperLampBlock(Oxidizable.OxidationLevel.UNAFFECTED, FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
 	public static final Block EXPOSED_COPPER_LAMP = new OxidizableCopperLampBlock(Oxidizable.OxidationLevel.EXPOSED, FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
 	public static final Block WEATHERED_COPPER_LAMP = new OxidizableCopperLampBlock(Oxidizable.OxidationLevel.WEATHERED, FabricBlockSettings.of(Material.REDSTONE_LAMP).luminance(createLightLevelFromLitBlockState(15)).strength(0.3F).sounds(BlockSoundGroup.GLASS));
@@ -44,9 +47,16 @@ public class CopperLampMod implements ModInitializer {
 	public static final Block COPPER_CAPACITOR_BLOCK = new CopperCapacitorBlock(FabricBlockSettings.copy(COPPER_BLOCK));
 	public static final BlockEntityType<CopperCapacitorBlockEntity> COPPER_CAPACITOR_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(CopperCapacitorBlockEntity::new, COPPER_CAPACITOR_BLOCK).build(null);
 
+	// Configuration
+	public static final SimpleConfig CONFIG = SimpleConfig.of( "copper-lamp" ).provider(
+			(filename) -> "# Copper Lamp configuration file\n\n# Energy transferred by copper torch each tick (controlled server-side)\ncopper_torch_energy=1"
+	).request();
+	public static final int COPPER_TORCH_ENERGY = CONFIG.getOrDefault( "copper_torch_energy", 1 );
+
+
 	@Override
 	public void onInitialize() {
-		LOGGER.info("Registering oxidizable copper lamp blocks");
+		LOGGER.info("Registering blocks for the Copper Lamp mod");
 		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "copper_lamp"), COPPER_LAMP);
 		Registry.register(Registry.ITEM, new Identifier("copperlamp", "copper_lamp"), new BlockItem(COPPER_LAMP, new FabricItemSettings().group(ItemGroup.DECORATIONS)));
 		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "exposed_copper_lamp"), EXPOSED_COPPER_LAMP);
@@ -70,22 +80,25 @@ public class CopperLampMod implements ModInitializer {
 		OxidizableBlocksRegistry.registerWaxableBlockPair(EXPOSED_COPPER_LAMP, WAXED_EXPOSED_COPPER_LAMP);
 		OxidizableBlocksRegistry.registerWaxableBlockPair(WEATHERED_COPPER_LAMP, WAXED_WEATHERED_COPPER_LAMP);
 		OxidizableBlocksRegistry.registerWaxableBlockPair(OXIDIZED_COPPER_LAMP, WAXED_OXIDIZED_COPPER_LAMP);
-
-		LOGGER.info("Registering copper torch");
 		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "copper_wall_torch"), COPPER_WALL_TORCH);
 		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "lit_copper_wall_torch"), LIT_COPPER_WALL_TORCH);
 		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "copper_torch"), COPPER_TORCH);
 		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "lit_copper_torch"), LIT_COPPER_TORCH);
 		Registry.register(Registry.ITEM, new Identifier("copperlamp", "copper_torch"), COPPER_TORCH_ITEM);
 		Registry.register(Registry.ITEM, new Identifier("copperlamp", "lit_copper_torch"), LIT_COPPER_TORCH_ITEM);
-
-		LOGGER.info("Registering powered copper block");
 		Registry.register(Registry.BLOCK, new Identifier("copperlamp", "copper_capacitor_block"), COPPER_CAPACITOR_BLOCK);
 		Registry.register(Registry.ITEM, new Identifier("copperlamp", "copper_capacitor_block"), new BlockItem(COPPER_CAPACITOR_BLOCK, new FabricItemSettings().group(ItemGroup.DECORATIONS)));
 		Registry.register(Registry.BLOCK_ENTITY_TYPE, "copperlamp:copper_capacitor_block_entity", COPPER_CAPACITOR_BLOCK_ENTITY);
 		EnergyStorage.SIDED.registerForBlockEntity(
 				(entity, direction) -> entity.energyStorage, COPPER_CAPACITOR_BLOCK_ENTITY
 		);
+		// Load config 'config.properties', if it isn't present create one
+		// using the lambda specified as the provider.
+
+
+		// Custom config provider, returnes the default config content
+		// if the custom provider is not specified SimpleConfig will create an empty file instead
+
 	}
 
 	private static ToIntFunction<BlockState> createLightLevelFromLitBlockState(int litLevel) {
