@@ -1,5 +1,7 @@
 # Copper Lamp
-A mod for Minecraft 1.18 using Fabric
+A mod for Minecraft 1.18 using Fabric.
+
+- [Watch the video demonstration](https://www.youtube.com/watch?v=X2LaHqT0mjE) 🎥
 
 ![Screenshot](/screenshot.png?raw=true)
 ![Crafting Recipe: 7 copper ingots, 1 glowstone, 1 redstone torch](/recipe.png?raw=true)
