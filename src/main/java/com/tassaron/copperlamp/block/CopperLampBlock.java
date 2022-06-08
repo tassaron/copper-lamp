@@ -7,9 +7,9 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
-import java.util.Random;
 
 public class CopperLampBlock extends RedstoneLampBlock {
     public static final BooleanProperty LIT = BooleanProperty.of("lit");
@@ -20,7 +20,7 @@ public class CopperLampBlock extends RedstoneLampBlock {
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return (BlockState)this.getDefaultState().with(LIT, !ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos()));
+        return (BlockState)this.getDefaultState().with(LIT, !(ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos())));
     }
 
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
@@ -30,7 +30,7 @@ public class CopperLampBlock extends RedstoneLampBlock {
                 if (bl) {
                     world.createAndScheduleBlockTick(pos, this, 4);
                 } else {
-                    world.setBlockState(pos, (BlockState)state.cycle(LIT), 2);
+                    world.setBlockState(pos, (BlockState)state.cycle(LIT), Block.NOTIFY_LISTENERS);
                 }
             }
 
@@ -39,7 +39,7 @@ public class CopperLampBlock extends RedstoneLampBlock {
 
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if ((Boolean)state.get(LIT) && world.isReceivingRedstonePower(pos)) {
-            world.setBlockState(pos, (BlockState)state.cycle(LIT), 2);
+            world.setBlockState(pos, (BlockState)state.cycle(LIT), Block.NOTIFY_LISTENERS);
         }
     }
 }

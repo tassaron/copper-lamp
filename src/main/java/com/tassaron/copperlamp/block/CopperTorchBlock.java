@@ -9,10 +9,9 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.minecraft.util.math.random.Random;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
-
-import java.util.Random;
 
 import static com.tassaron.copperlamp.CopperLampMod.COPPER_TORCH_ENERGY;
 
@@ -56,7 +55,6 @@ public class CopperTorchBlock extends TorchBlock {
         }
     }
 
-    @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (lit) {
             super.randomDisplayTick(state, world, pos, random);
